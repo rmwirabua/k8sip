@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client_deployment
+  labels:
+    app: client_frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client_frontend
+  template:
+    metadata:
+      labels:
+        app: client_frontend
+    spec:
+      containers:
+      - name: client_frontend
+        image: gcr.io/mwirabua/yolo_k8ip_client
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+          - mountPath: VOLUME_PATH
+            name: VOLUME_NAME
+      volumes:
+        - name: VOLUME_NAME
+          # This GCE PD must already exist.
+          gcePersistentDisk:
+            pdName: PERSISTENT_DISK_NAME
+            fsType: ext4
+      envFrom:
+      - secretRef:
+          name: SECRETS_NAME
