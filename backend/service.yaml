@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend_server 
+spec:
+  selector:
+    app: backend_server  
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5002 # External
+    targetPort: 5000 # Container
+    nodePort: 31110 # Node (Machine running the container)
+
+    # kubectl apply -f service.yaml
