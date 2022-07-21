@@ -3,31 +3,31 @@ kind: Deployment
 metadata:
   name: client_deployment
   labels:
-    app: client_frontend
+    app: clientfrontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: client_frontend
+      app: clientfrontend
   template:
     metadata:
       labels:
-        app: client_frontend
+        app: clientfrontend
     spec:
       containers:
-      - name: client_frontend
+      - name: clientfrontend
         image: gcr.io/mwirabua/yolo_k8ip_client
         ports:
         - containerPort: 3000
         volumeMounts:
-          - mountPath: VOLUME_PATH
-            name: VOLUME_NAME
+          - mountPath: /vol
+            name: client-volume
       volumes:
-        - name: VOLUME_NAME
+        - name: client-volume
           # This GCE PD must already exist.
           gcePersistentDisk:
-            pdName: PERSISTENT_DISK_NAME
+            pdName: my-data-disk
             fsType: ext4
-      envFrom:
-      - secretRef:
-          name: SECRETS_NAME
+      # envFrom:
+      # - secretRef:
+      #     name: SECRETS_NAME

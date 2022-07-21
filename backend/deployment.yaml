@@ -20,14 +20,17 @@ spec:
         ports:
         - containerPort: 5000
         volumeMounts:
-          - mountPath: VOLUME_PATH
-            name: VOLUME_NAME
+          - mountPath: /vol
+            name: backend-volume
       volumes:
-        - name: VOLUME_NAME
+        - name: backend-volume
           # This GCE PD must already exist.
           gcePersistentDisk:
-            pdName: PERSISTENT_DISK_NAME
+            pdName: my-data-disk
             fsType: ext4
-      envFrom:
-      - secretRef:
-          name: SECRETS_NAME
+      # envFrom:
+      # - secretRef:
+      #     name: SECRETS_NAME
+      # envFrom:
+      # - secretRef:
+      #     name: SECRETS_NAME

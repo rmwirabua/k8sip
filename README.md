@@ -21,3 +21,7 @@ Make sure that you have the following installed:
  `npm start`
 
  ### Go ahead a nd add a product (note that the price field only takes a numeric input)
+
+ ## created images on gke
+ 'gcr.io/mwirabua/yolo_k8ip_backend'
+ 'gcr.io/mwirabua/yolo_k8ip_client'
